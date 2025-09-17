@@ -8,8 +8,51 @@ class Tour {
     }
 }
 
+function saveTours(tours) {
+    localStorage.setItem("tours", JSON.stringify(tours));
+}
+
+function loadTours() {
+    let values = localStorage.getItem("tours");
+    if (values) {
+        return JSON.parse(values);
+    }
+    return [];
+}
+
+function handleFormSubmission(tours) {
+    let submitBtn = document.querySelector("#dodajTuru");
+
+    submitBtn.addEventListener('click', function () {
+        const form = document.querySelector("#tourForm");
+        const formData = new FormData(form);
+
+        const naziv = formData.get("naziv");
+        const duzina = formData.get("duzina");
+        const opis = formData.get("opis");
+        const tagoviText = formData.get("tagovi");
+        const tagovi = tagoviText.split(',').map(t => t.trim());
+
+        for (let i = 0; i < tours.length; i++) {
+            if (naziv === tours[i].naziv) {
+                return;
+            }
+        }
+
+        const newTour = new Tour(naziv, duzina, opis, tagovi);
+        tours.push(newTour);
+        saveTours(tours);
+        createTourRows(tours);
+
+        form.reset();
+    });
+}
+
+
 function createTourRows (tours) {
     let table = document.querySelector ("#tableDetails")
+
+    table.innerHTML = ''
 
     for (let i=0; i<tours.length; i++){
 
@@ -48,14 +91,11 @@ function displayTourDetails (tour) {
 }
 
 
-function initializeTours () {
-    let tours= [
-        new Tour("Planinska tura", 15, "Avantura za one koji vole prirodu i planinarenje.", ["priroda", "planinarenje", "avantura"]),
-        new Tour("Istorijska tura", 10, "Otkrijte bogatu istoriju kroz muzeje i galerije.", ["istorija", "muzeji", "galerije"]),
-        new Tour("Gradska tura", 8, "Upoznajte gradsku atmosferu i znamenitosti.", ["grad", "kultura", "setnja"])
-    ];
+function initializeTours() {
+    let tours = loadTours();
 
-    createTourRows (tours);
+    createTourRows(tours);
+    handleFormSubmission(tours);
 }
 
 document.addEventListener('DOMContentLoaded',initializeTours);

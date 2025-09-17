@@ -24,6 +24,24 @@
 
         <div id="tourDetails">
         </div>
+        
+        <div>
+            <form id="tourForm">
+                <label for="naziv">Naziv:</label>
+                <input type="text" id="naziv" name="naziv" required>
+
+                <label for="duzina">Duzina (km):</label>
+                <input type="number" id="duzina" name="duzina" required>
+
+                <label for="opis">Opis:</label>
+                <textarea id="opis" name="opis" required></textarea>
+
+                <label for="tagovi">Tagovi (tipovi ture):</label>
+                <textarea id="tagovi" name="tagovi" required></textarea>
+                </div>
+            </form>
+            <button type="button" id="dodajTuru">Dodaj turu</button>
+        </div>
         <script src="tour.js"></script>
     </body>
 </html>
