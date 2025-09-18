@@ -6,12 +6,19 @@ class Restoran{
   }
 }
 
+let restorani = []
+
 function ucitajRestorane(){
-  let restorani=[
+  restorani = restoraniSaLokalnog()
+
+  if(restorani.length === 0){
+    restorani=[
     new Restoran("Italijansi kutak", "Italijanska", "Autenticni ukusi italije u centru grada."),
     new Restoran("Azijski raj", "Azijska, Indonezanska", "Jedinstveni ukusi Azije."),
     new Restoran("Gurmanova oaza", "Srpska, Balkanska", "Narodna srpska kuhinja.")
   ]
+  restoraniNaLokalni(restorani)
+  }
   dodajRestoranUTabelu(restorani)
 }
 
@@ -39,6 +46,46 @@ function dodajRestoranUTabelu(restorani){
   }
 }
 
+
+function dodajNoviRestoran(restorani){
+
+  let btn = document.querySelector("#dugme")
+  btn.addEventListener('click', function(reload){
+    reload.preventDefault();
+
+    const forma = document.querySelector("#formaRestoran")
+
+  const formData = new FormData(forma)
+
+  const naziv = formData.get("naziv")
+  const kuhinja = formData.get("kuhinja")
+  const opis = formData.get("opis")
+
+  const noviRestoran = new Restoran(naziv, kuhinja, opis)
+
+  restorani.push(noviRestoran)
+  
+  restoraniNaLokalni(restorani)
+
+  dodajRestoranUTabelu(restorani)
+
+
+
+  })
+}
+
+function restoraniSaLokalnog(){
+  let data = localStorage.getItem("restorani")
+  if(data){
+    return JSON.parse(data)
+  }
+  return []
+}
+
+function restoraniNaLokalni(restorani){
+  localStorage.setItem("restorani", JSON.stringify(restorani))
+}
+
 function prikaziDetaljeRestorana(restoran){
   let p = document.createElement("p")
 
@@ -51,3 +98,5 @@ function prikaziDetaljeRestorana(restoran){
   detaljiRestorana.appendChild(p)
 }
 document.addEventListener("DOMContentLoaded", ucitajRestorane)
+ucitajRestorane()
+dodajNoviRestoran(restorani)
