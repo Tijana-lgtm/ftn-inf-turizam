@@ -7,20 +7,42 @@
   </head>
 
   <body>
+
+    <nav>
+      <button>Kontakt</button>
+      <button>Ture</button>
+      <button>Restorani</button>
+    </nav>
+
     <div>
       <h2>TourApp</h2>
       <hr>
       <table>
-        <head>
+        <thead>
           <tr>
             <th>Naziv</th>
             <th>Kuhinja</th>
           </tr>
-        </head>
+        </thead>
 
         <tbody id="tabela"></tbody>
       </table>
     </div>
+
+    <h3>Dodaj novi restoran</h3>
+    <form id="formaRestoran">
+      <label for="naziv">Naziv:</label><br>
+      <input type="text" id="naziv" name="naziv" required><br>
+
+      <label for="kuhinja">Kuhinja:</label><br>
+      <input type="text" id="kuhinja" name="kuhinja" required><br>
+
+      <label for="opis">Opis:</label><br>
+      <textarea id="opis" name="opis" required></textarea><br><br>
+
+      <button type="submit" id="dugme">Dodaj</button>
+
+    </form>
 
     <div id="detaljiRestorana"></div>
     <script src="restorani.js"></script>

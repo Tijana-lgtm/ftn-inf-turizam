@@ -22,6 +22,30 @@ tr:hover {
     background-color: #ddd;
 }
 
+nav{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    justify-content: flex-end;
+}
+
+#formaRestoran{
+    border: 1px solid black;
+    width: 20%;
+    padding: 22px;
+    margin-top: 20px;
+}
+
+#dugme{
+    float: right;
+}
+
+nav button{
+    width: 70px;
+    height: 40px;
+    text-align: center;
+}
+
 #detaljiRestorana {
     border: 1px solid black;
     padding: 10px;
