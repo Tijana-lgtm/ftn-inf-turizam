@@ -94,6 +94,15 @@ function displayTourDetails (tour) {
 function initializeTours() {
     let tours = loadTours();
 
+    if (tours.length === 0) {
+        tours = [
+            new Tour("Planinska", 5, "Kratka planinska šetnja.", ["planina", "priroda", "šetnja"]),
+            new Tour("Istorijska", 3, "Obilazak istorijskih znamenitosti.", ["istorija", "kultura", "muzej"]),
+            new Tour("Gradska", 2, "Lagana tura kroz centar grada.", ["grad", "šetnja", "zabava"])
+        ];
+        saveTours(tours);
+    }
+
     createTourRows(tours);
     handleFormSubmission(tours);
 }
